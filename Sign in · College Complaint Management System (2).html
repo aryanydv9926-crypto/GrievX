@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in · College Complaint Management System</title><style>:root{--navy:#0b2a5b;--navy-2:#123a7a;--sky:#eaf3fd;--line:#b9c8de;--ink:#14213d;--muted:#4b5b78;--err:#b3261e;--ok:#17633a}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{background:#dcebfb linear-gradient(160deg,#dcebfb,#eef5fd 55%,#cfe2f7)}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;font:16px/1.5 system-ui,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
+.stage{flex:1;display:grid;place-items:center;padding:28px 16px}
+.card{width:100%;max-width:440px;background:#fff;border-radius:20px;padding:32px;box-shadow:0 1px 2px rgba(11,42,91,.08),0 24px 48px -16px rgba(11,42,91,.28);animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.brand{text-align:center;margin-bottom:20px}
+.logo{width:56px;height:56px}
+h1{font-size:1.375rem;line-height:1.25;letter-spacing:-.01em;color:var(--navy);margin:12px 0 6px}
+h2{font-size:1.125rem;margin:0 0 14px;color:var(--navy)}
+.brand p,.muted{margin:0 0 14px;color:var(--muted);font-size:.9375rem}.brand p{margin:0}
+.art{width:84px;height:auto;margin-top:12px}
+.field{margin-bottom:14px}
+label,legend{font-size:.875rem;font-weight:600;color:var(--ink)}
+.field label{display:block;margin-bottom:6px}
+input:not([type=radio],[type=checkbox]),select{width:100%;padding:11px 12px;font:inherit;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;transition:border-color .15s,box-shadow .15s}
+input::placeholder{color:#6b7a94}
+input:focus-visible,.btn:focus-visible,.link:focus-visible,.eye:focus-visible{outline:3px solid #2f6fc0;outline-offset:2px}
+input:not([type=radio],[type=checkbox]):focus,select:focus{border-color:var(--navy-2)}
+input[aria-invalid=true],select[aria-invalid=true]{border-color:var(--err)}
+.err{min-height:0;margin:4px 0 0;font-size:.8125rem;color:var(--err)}.err:empty{display:none}
+.pw{position:relative}.pw input{padding-right:46px}
+.eye{position:absolute;right:4px;top:50%;translate:0 -50%;width:38px;height:38px;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer}
+.eye:hover{background:var(--sky);color:var(--navy)}
+.eye svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.eye .slash{display:none}.eye[aria-pressed=true] .slash{display:inline}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 0 16px;padding:4px;border:0;background:var(--sky);border-radius:12px}
+.seg.two{grid-template-columns:repeat(2,1fr)}
+.seg legend{float:left;position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.seg input{position:absolute;opacity:0}
+.seg span{display:block;text-align:center;padding:8px 4px;border-radius:9px;font-size:.875rem;font-weight:600;color:var(--navy-2);cursor:pointer;transition:background .2s,color .2s}
+.seg input:checked+span{background:var(--navy);color:#fff}
+.seg input:focus-visible+span{outline:3px solid #2f6fc0;outline-offset:2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;font-size:.875rem}
+.check{display:flex;align-items:center;gap:8px;font-weight:500}.check input{width:18px;height:18px;accent-color:var(--navy)}
+.link{padding:0;border:0;background:none;font:inherit;font-weight:600;color:var(--navy-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}.link:hover{color:var(--navy)}
+.btn{position:relative;display:inline-flex;justify-content:center;width:100%;padding:12px 16px;font:inherit;font-weight:600;color:#fff;background:var(--navy);border:0;border-radius:10px;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s}
+.btn:hover{background:var(--navy-2);box-shadow:0 8px 18px -8px rgba(11,42,91,.6)}.btn:active{transform:translateY(1px)}
+.btn:disabled{cursor:progress;opacity:.85}
+.btn.loading span{opacity:0}
+.btn.loading::after{content:"";position:absolute;inset:0;margin:auto;width:20px;height:20px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+.alt{margin:16px 0 0;text-align:center;font-size:.875rem;color:var(--muted)}
+.alert{margin-bottom:16px;padding:10px 12px;border-radius:10px;font-size:.875rem;border:1px solid}
+.alert.error{color:var(--err);background:#fdecea;border-color:#f3b8b3}.alert.ok{color:var(--ok);background:#e8f6ee;border-color:#a8d9bd}
+.dash{text-align:center}.dash h1{margin-top:0}
+footer{padding:16px;text-align:center;font-size:.8125rem;color:var(--muted)}
+@media(max-width:480px){.card{padding:24px 20px}.row{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.demo{margin:0 0 12px;font-size:.8125rem;color:#123a7a;text-align:center}
+#wrap{width:100%;max-width:440px;transition:max-width .3s}#wrap .card{max-width:none}.stage{grid-template-columns:minmax(0,1fr)}#wrap{margin:0 auto}
+textarea{width:100%;min-height:92px;padding:11px 12px;font:inherit;color:var(--ink);border:1.5px solid var(--line);border-radius:10px;resize:vertical}textarea:focus{border-color:var(--navy-2);outline:3px solid #2f6fc0;outline-offset:2px}
+.board{text-align:left}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}.top h2{margin:0 0 2px}.top .muted{margin:0}
+.out{width:auto;padding:9px 16px;flex:none}
+#d-new{padding:16px;margin-bottom:20px;background:var(--sky);border-radius:14px}#d-new h3{margin:0 0 10px}
+h3{font-size:1rem;color:var(--navy);margin:0 0 10px}
+.cc{padding:14px;margin-bottom:10px;border:1px solid var(--line);border-radius:12px}
+.cc header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.cc strong{color:var(--navy)}
+.cc .meta{margin:2px 0 8px;font-size:.8125rem;color:var(--muted)}.cc p{margin:0 0 8px;font-size:.9375rem;overflow-wrap:anywhere}
+.badge{flex:none;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:600}
+.b0{background:#fdecea;color:#8a1c14}.b1{background:#fff4d6;color:#6b4a00}.b2{background:#e8f6ee;color:#17633a}
+.reply{padding:8px 10px;background:var(--sky);border-radius:8px;font-size:.875rem}
+.ctl{display:grid;grid-template-columns:150px 1fr auto;gap:8px;margin-top:8px}.ctl .btn{width:auto;padding:9px 16px}
+@media(max-width:560px){.ctl{grid-template-columns:1fr}.top{flex-direction:column}}</style></head>
+<body>
+<main class="stage"><div id="wrap"><p class="demo">Live demo: accounts and complaints stay in this browser only. Admin login: admin@college.edu / Admin12345. Register a student to file complaints, and a faculty member in the same department to review them.</p><section class="card" aria-labelledby="title">
+  <header class="brand">
+    <!-- Replace this inline SVG with <img src="/img/college-logo.png" alt="Your College logo"> -->
+    <svg class="logo" viewBox="0 0 48 48" role="img" aria-label="College logo"><path d="M24 3 42 9v14c0 11-7.500 18.500-18 22C13.500 41.500 6 34 6 23V9z" fill="#0b2a5b"/><path d="M13 19c4-1.500 8-1 11 1.500 3-2.500 7-3 11-1.500v13c-4-1.500-8-1-11 1.500-3-2.500-7-3-11-1.500z" fill="#fff"/><path d="M24 20.500v13" stroke="#0b2a5b" stroke-width="1.500"/></svg>
+    <h1 id="title">College Complaint Management System</h1>
+    <p>Your voice matters. Report issues and help improve campus life.</p>
+    <svg class="art" viewBox="0 0 120 64" aria-hidden="true"><path d="M60 6 100 22 60 38 20 22z" fill="#123a7a"/><path d="M36 30v12c0 5 11 9 24 9s24-4 24-9V30L60 40z" fill="#2f6fc0"/><path d="M100 24v18" stroke="#123a7a" stroke-width="3" stroke-linecap="round"/><circle cx="100" cy="46" r="3.500" fill="#9cc4ee"/></svg>
+  </header>
+  <div id="alert" class="alert" role="alert" hidden></div>
+
+  <form class="view" id="v-login" novalidate>
+    <h2>Sign in</h2>
+    <fieldset class="seg"><legend>I am a</legend>
+      <label><input type="radio" name="role" value="student" checked><span>Student</span></label>
+      <label><input type="radio" name="role" value="faculty"><span>Faculty</span></label>
+      <label><input type="radio" name="role" value="admin"><span>Administrator</span></label>
+    </fieldset>
+    <div class="field"><label for="l-id">Email or College ID</label><input id="l-id" name="identifier" data-rule="identifier" autocomplete="username" placeholder="name@college.edu" aria-describedby="l-id-e"><p class="err" id="l-id-e"></p></div>
+    <div class="field"><label for="l-pw">Password</label><div class="pw"><input id="l-pw" name="password" type="password" data-rule="loginPassword" autocomplete="current-password" placeholder="Your password" aria-describedby="l-pw-e"><button type="button" class="eye" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.500-7 10-7 10 7 10 7-3.500 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="slash" d="M4 4l16 16"/></svg></button></div><p class="err" id="l-pw-e"></p></div>
+    <div class="row"><label class="check"><input type="checkbox" name="remember"> Remember me</label><button type="button" class="link" data-go="forgot">Forgot password?</button></div>
+    <button class="btn" type="submit"><span>Sign in</span></button>
+    <p class="alt">Don't have an account? <button type="button" class="link" data-go="register">Register here.</button></p>
+  </form>
+
+  <form class="view" id="v-register" novalidate hidden>
+    <h2>Create your account</h2>
+    <fieldset class="seg two"><legend>I am a</legend>
+      <label><input type="radio" name="role" value="student" checked><span>Student</span></label>
+      <label><input type="radio" name="role" value="faculty"><span>Faculty</span></label>
+    </fieldset>
+    <div class="field"><label for="r-name">Full name</label><input id="r-name" name="name" data-rule="name" autocomplete="name" aria-describedby="r-name-e"><p class="err" id="r-name-e"></p></div>
+    <div class="field"><label for="r-email">College email</label><input id="r-email" name="email" type="email" data-rule="email" autocomplete="email" placeholder="name@college.edu" aria-describedby="r-email-e"><p class="err" id="r-email-e"></p></div>
+    <div class="field"><label for="r-cid" id="r-cid-l">Student ID</label><input id="r-cid" name="collegeId" data-rule="collegeId" autocomplete="off" placeholder="e.g. CS2026-014" aria-describedby="r-cid-e"><p class="err" id="r-cid-e"></p></div>
+    <div class="field"><label for="r-dept">Department</label><input id="r-dept" name="department" data-rule="department" placeholder="e.g. Computer Science" aria-describedby="r-dept-e"><p class="err" id="r-dept-e"></p></div>
+    <div id="student-only"><div class="field"><label for="r-course">Course</label><input id="r-course" name="course" data-rule="course" placeholder="e.g. B.Tech" aria-describedby="r-course-e"><p class="err" id="r-course-e"></p></div>
+    <div class="field"><label for="r-year">Year of study</label><select id="r-year" name="year" data-rule="year" aria-describedby="r-year-e"><option value="">Select year</option><option value="1">1st year</option><option value="2">2nd year</option><option value="3">3rd year</option><option value="4">4th year</option><option value="5">5th year</option></select><p class="err" id="r-year-e"></p></div></div>
+    <div class="field"><label for="r-pw">Password</label><input id="r-pw" name="password" type="password" data-rule="password" autocomplete="new-password" placeholder="8+ characters" aria-describedby="r-pw-e"><p class="err" id="r-pw-e"></p></div>
+    <div class="field"><label for="r-pw2">Confirm password</label><input id="r-pw2" name="confirm" type="password" data-rule="confirm" autocomplete="new-password" aria-describedby="r-pw2-e"><p class="err" id="r-pw2-e"></p></div>
+    <button class="btn" type="submit"><span>Create account</span></button>
+    <p class="alt">Already registered? <button type="button" class="link" data-go="login">Sign in.</button></p>
+  </form>
+
+  <form class="view" id="v-forgot" novalidate hidden>
+    <h2>Reset your password</h2>
+    <p class="muted">Enter your email or College ID and we'll send a reset link.</p>
+    <div class="field"><label for="f-id">Email or College ID</label><input id="f-id" name="identifier" data-rule="identifier" autocomplete="username" aria-describedby="f-id-e"><p class="err" id="f-id-e"></p></div>
+    <button class="btn" type="submit"><span>Send reset link</span></button>
+    <p class="alt"><button type="button" class="link" data-go="login">Back to sign in</button></p>
+  </form>
+
+  <form class="view" id="v-reset" novalidate hidden>
+    <h2>Choose a new password</h2>
+    <div class="field"><label for="x-pw">New password</label><input id="x-pw" name="password" type="password" data-rule="password" autocomplete="new-password" aria-describedby="x-pw-e"><p class="err" id="x-pw-e"></p></div>
+    <div class="field"><label for="x-pw2">Confirm new password</label><input id="x-pw2" name="confirm" type="password" data-rule="confirm" autocomplete="new-password" aria-describedby="x-pw2-e"><p class="err" id="x-pw2-e"></p></div>
+    <button class="btn" type="submit"><span>Save new password</span></button>
+  </form>
+<div class="view board" id="v-dash" hidden>
+ <div class="top"><div><h2 id="d-hello"></h2><p class="muted" id="d-note"></p></div><button class="btn out" id="d-out" type="button"><span>Sign out</span></button></div>
+ <form id="d-new" novalidate hidden><h3>New complaint</h3><p class="err" id="d-err" role="alert"></p>
+  <div class="field"><label for="n-cat">Category</label><select id="n-cat"><option>Academics</option><option>Hostel</option><option>Facilities</option><option>Library</option><option>Transport</option><option>Other</option></select></div>
+  <div class="field"><label for="n-sub">Subject</label><input id="n-sub" maxlength="100" placeholder="e.g. Projector not working in Room 204"></div>
+  <div class="field"><label for="n-desc">Description</label><textarea id="n-desc" maxlength="1000" placeholder="What happened, where, and since when?"></textarea></div>
+  <button class="btn" type="submit"><span>Submit complaint</span></button></form>
+ <h3 id="d-title"></h3><div id="d-list"></div></div>
+</section></div></main>
+<footer>© 2026 College Complaint Management System</footer>
+<script>const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const alertBox = $('#alert');
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/, CID = /^[A-Za-z0-9-]{4,20}$/;
+
+function notice(msg, type = 'error') { alertBox.textContent = msg; alertBox.className = 'alert ' + type; alertBox.hidden = !msg; }
+function go(name) {
+  $$('.view').forEach((v) => (v.hidden = v.id !== 'v-' + name));
+  notice(''); $('.view:not([hidden]) input:not([type=radio])')?.focus();
+}
+
+// Validation rules: return an error message, or '' when valid. Inputs opt in via data-rule.
+const rules = {
+  identifier: (v) => !v ? 'Enter your email address or College ID.' : EMAIL.test(v) || CID.test(v) ? '' : 'Enter a valid email address or College ID.',
+  email: (v) => !v ? 'Enter your email address.' : EMAIL.test(v) ? '' : 'Enter a valid email, like name@college.edu.',
+  name: (v) => v.length < 2 ? 'Enter your full name.' : '',
+  department: (v) => v.length >= 2 && v.length <= 80 ? '' : 'Enter your department, like Computer Science.',
+  course: (v) => v.length >= 2 && v.length <= 80 ? '' : 'Enter your course, like B.Tech.',
+  year: (v) => v ? '' : 'Select your year of study.',
+  collegeId: (v) => CID.test(v) ? '' : 'Use 4–20 letters, numbers or hyphens.',
+  loginPassword: (v) => v ? '' : 'Enter your password.',
+  password: (v) => v.length >= 8 && /[A-Za-z]/.test(v) && /\d/.test(v) ? '' : 'Use at least 8 characters with a letter and a number.',
+  confirm: (v, f) => v === f.elements.password.value ? '' : 'Passwords do not match.'
+};
+function validate(form) {
+  let first = null;
+  $$('[data-rule]', form).forEach((el) => {
+    if (el.closest('[hidden]')) return; // skip student-only fields for faculty
+    const isPw = el.type === 'password', msg = rules[el.dataset.rule](isPw ? el.value : el.value.trim(), form);
+    el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    $('#' + el.getAttribute('aria-describedby')).textContent = msg;
+    if (msg && !first) first = el;
+  });
+  first?.focus(); return !first;
+}
+$$('[data-rule]').forEach((el) => el.addEventListener('input', () => { el.setAttribute('aria-invalid', 'false'); $('#' + el.getAttribute('aria-describedby')).textContent = ''; }));
+
+async function submit(form, endpoint, payload, onOk) {
+  notice(''); if (!validate(form)) return;
+  const btn = $('button[type=submit]', form); btn.disabled = true; btn.classList.add('loading');
+  try {
+    const r = await fetch(endpoint, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const d = await r.json().catch(() => ({}));
+    r.ok ? onOk(d) : notice(d.error || 'Something went wrong. Try again.');
+  } catch { notice('Cannot reach the server. Check your connection and try again.'); }
+  finally { btn.disabled = false; btn.classList.remove('loading'); }
+}
+const val = (f, n) => (f.elements[n].type === 'password' ? f.elements[n].value : f.elements[n].value.trim());
+
+$('#v-login').addEventListener('submit', (e) => { e.preventDefault(); const f = e.target;
+  submit(f, '/api/login', { identifier: val(f, 'identifier'), password: val(f, 'password'), role: f.elements.role.value, remember: f.elements.remember.checked }, () => render()); });
+$('#v-register').addEventListener('submit', (e) => { e.preventDefault(); const f = e.target;
+  submit(f, '/api/register', { role: f.elements.role.value, name: val(f, 'name'), email: val(f, 'email'), collegeId: val(f, 'collegeId'), department: val(f, 'department'), password: val(f, 'password'),
+      ...(f.elements.role.value === 'student' ? { course: val(f, 'course'), year: val(f, 'year') } : {}) },
+    () => { f.reset(); go('login'); notice('Account created. Sign in to continue.', 'ok'); }); });
+$('#v-forgot').addEventListener('submit', (e) => { e.preventDefault(); const f = e.target;
+  submit(f, '/api/forgot', { identifier: val(f, 'identifier') }, (d) => notice(d.message, 'ok')); });
+$$('#v-register [name=role]').forEach((r) => r.addEventListener('change', () => {
+  const student = $('#v-register [name=role]:checked').value === 'student';
+  $('#student-only').hidden = !student; $('#r-cid-l').textContent = student ? 'Student ID' : 'Faculty ID';
+}));
+const token = new URLSearchParams(location.search).get('token');
+$('#v-reset').addEventListener('submit', (e) => { e.preventDefault(); const f = e.target;
+  submit(f, '/api/reset', { token, password: val(f, 'password') }, () => { history.replaceState(null, '', '/'); f.reset(); go('login'); notice('Password updated. Sign in with your new password.', 'ok'); }); });
+
+$$('[data-go]').forEach((b) => b.addEventListener('click', () => go(b.dataset.go)));
+$$('.eye').forEach((b) => b.addEventListener('click', () => {
+  const input = b.previousElementSibling, show = input.type === 'password';
+  input.type = show ? 'text' : 'password'; b.setAttribute('aria-pressed', show); b.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+}));
+if (token) go('reset');
+
+// ===== DEMO BACKEND (runs in this browser; the downloadable project uses server.js + SQLite) =====
+const mem={}, store={get(k){try{const v=localStorage.getItem(k);if(v!==null)return JSON.parse(v)}catch{}return mem[k]||[]},set(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+let sessId=null; const sess={get(){try{return sessionStorage.getItem('ccms_s')||sessId}catch{return sessId}},set(v){sessId=v;try{v?sessionStorage.setItem('ccms_s',v):sessionStorage.removeItem('ccms_s')}catch{}}};
+const U='ccms_users',C='ccms_complaints',hex=(b)=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const dHash=async(pw,salt)=>hex(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salt+pw)));
+const dStrong=(p)=>typeof p==='string'&&p.length>=8&&/[A-Za-z]/.test(p)&&/\d/.test(p);
+const reply=(code,o)=>new Response(JSON.stringify(o),{status:code,headers:{'Content-Type':'application/json'}});
+const me=()=>store.get(U).find((u)=>u.id===sess.get())||null;
+const ready=(async()=>{ if(store.get(U).some((u)=>u.role==='admin'))return; const salt=crypto.randomUUID();
+  store.set(U,[...store.get(U),{id:'admin',name:'Administrator',email:'admin@college.edu',collegeId:'ADMIN',department:'Administration',role:'admin',salt,pw:await dHash('Admin12345',salt)}]); })();
+window.fetch=async(url,o={})=>{ await ready; const b=JSON.parse(o.body||'{}'), all=store.get(U);
+  if(url==='/api/login'){ const id=String(b.identifier||'').trim().toLowerCase(), u=all.find((x)=>x.email===id||x.collegeId.toLowerCase()===id);
+    if(!(u&&(await dHash(b.password||'',u.salt))===u.pw&&u.role===b.role))return reply(401,{error:'Invalid credentials for the selected role. Check your details and try again.'});
+    sess.set(u.id); return reply(200,{ok:true}); }
+  if(url==='/api/register'){ const cid=String(b.collegeId||'').trim(), em=String(b.email||'').trim().toLowerCase(), dept=String(b.department||'').trim(), st=b.role==='student', yr=Number(b.year), course=String(b.course||'').trim();
+    if(!['student','faculty'].includes(b.role))return reply(400,{error:'Choose Student or Faculty.'});
+    if(String(b.name||'').trim().length<2||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)||!/^[A-Za-z0-9-]{4,20}$/.test(cid)||dept.length<2||!dStrong(b.password)||(st&&(course.length<2||!(yr>=1&&yr<=6))))return reply(400,{error:'Check the highlighted fields and try again.'});
+    if(all.some((u)=>u.email===em||u.collegeId.toLowerCase()===cid.toLowerCase()))return reply(409,{error:'An account with this email or College ID already exists.'});
+    const salt=crypto.randomUUID(); store.set(U,[...all,{id:crypto.randomUUID(),name:b.name.trim(),email:em,collegeId:cid,department:dept,course:st?course:null,year:st?yr:null,role:b.role,createdAt:new Date().toISOString(),salt,pw:await dHash(b.password,salt)}]); return reply(201,{ok:true}); }
+  if(url==='/api/forgot')return reply(200,{message:'If an account matches, a reset link has been sent. (Demo: no email is sent here.)'});
+  return reply(404,{error:'Not found.'}); };
+
+// ===== Complaints: permissions are checked from the signed-in user's stored role, never from the UI =====
+const CATS=['Academics','Hostel','Facilities','Library','Transport','Other'], STAT=['Open','In review','Resolved'];
+const esc=(s)=>String(s).replace(/[&<>"']/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const canSee=(u,c)=>u.role==='admin'||(u.role==='faculty'&&c.department===u.department)||(u.role==='student'&&c.userId===u.id);
+function card(c,u){ const staff=u.role!=='student', d=new Date(c.createdAt).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
+  return `<article class="cc"><header><strong>${esc(c.subject)}</strong><span class="badge b${STAT.indexOf(c.status)}">${c.status}</span></header>
+  <p class="meta">${esc(c.category)}, ${d}${staff?`, from ${esc(c.userName)} (${esc(c.collegeId)}), ${esc(c.department)}`:''}</p><p>${esc(c.description)}</p>
+  ${c.response?`<p class="reply"><strong>Response:</strong> ${esc(c.response)}</p>`:''}
+  ${staff?`<div class="ctl" data-id="${c.id}"><select aria-label="Status">${STAT.map((s)=>`<option${s===c.status?' selected':''}>${s}</option>`).join('')}</select><input aria-label="Response to the student" maxlength="500" placeholder="Add a response (optional)" value="${esc(c.response||'')}"><button class="btn save" type="button"><span>Save</span></button></div>`:''}</article>`; }
+function render(){ const u=me(); if(!u){leave();return;}
+  $('#wrap').style.maxWidth='760px'; $('.art').hidden=true; go('dash'); window.scrollTo(0,0);
+  $('#d-hello').textContent='Welcome, '+u.name; $('#d-note').textContent=[u.role==='admin'?'Administrator':u.role==='faculty'?'Faculty':'Student',u.collegeId,u.department,u.course&&u.course+', year '+u.year].filter(Boolean).join(', ');
+  $('#d-new').hidden=u.role!=='student'; $('#d-title').textContent=u.role==='student'?'My complaints':u.role==='faculty'?'Complaints from '+u.department:'All complaints';
+  const list=store.get(C).filter((c)=>canSee(u,c)).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+  $('#d-list').innerHTML=list.length?list.map((c)=>card(c,u)).join(''):`<p class="muted">${u.role==='student'?'No complaints yet. Use the form above to submit your first one.':'No complaints to review yet.'}</p>`; }
+function leave(){ sess.set(null); $('#wrap').style.maxWidth=''; $('.art').hidden=false; go('login'); }
+$('#d-new').addEventListener('submit',(e)=>{ e.preventDefault(); const u=me(), cat=$('#n-cat').value, sub=$('#n-sub').value.trim(), desc=$('#n-desc').value.trim();
+  const err=!u||u.role!=='student'?'Only students can submit complaints.':sub.length<4?'Enter a subject of at least 4 characters.':desc.length<10?'Describe the problem in at least 10 characters.':'';
+  $('#d-err').textContent=err; if(err)return;
+  store.set(C,[...store.get(C),{id:crypto.randomUUID(),userId:u.id,userName:u.name,collegeId:u.collegeId,department:u.department,category:CATS.includes(cat)?cat:'Other',subject:sub,description:desc,status:'Open',response:'',createdAt:new Date().toISOString()}]);
+  e.target.reset(); render(); });
+$('#d-list').addEventListener('click',(e)=>{ const btn=e.target.closest('.save'); if(!btn)return; const u=me(), row=btn.closest('.ctl'), all=store.get(C), c=all.find((x)=>x.id===row.dataset.id);
+  if(!u||!c||u.role==='student'||!canSee(u,c))return; const st=row.querySelector('select').value; if(!STAT.includes(st))return;
+  c.status=st; c.response=row.querySelector('input').value.trim().slice(0,500); store.set(C,all); render(); });
+$('#d-out').addEventListener('click',leave);
+ready.then(()=>{ if(me())render(); });
+</script></body></html>
